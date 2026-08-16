@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlog — Celestial Memories</title>
+  <style>
+    body {
+      background-color: #080c18;
+      color: #f3f4f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { color: #faedd9; font-family: Georgia, serif; font-weight: normal; }
+    .btn {
+      display: inline-block;
+      background: #faedd9;
+      color: #080c18;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .entry-card {
+      background: #0f172a;
+      border: 1px solid rgba(238, 208, 157, 0.2);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .mood-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .title { font-family: Georgia, serif; font-size: 1.2rem; color: #fff; margin: 0.2rem 0; }
+    .text { color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; }
+    .meta { font-size: 0.75rem; color: #94a3b8; margin-top: 0.5rem; }
+    .media { max-width: 100%; border-radius: 0.5rem; margin-top: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✦ Starlog Memories</h1>
+    <a href="/new" class="btn">+ Inscribe New Star Memory</a>
+
+    {% for entry in entries %}
+      <div class="entry-card">
+        {% if entry.mood %}
+          <span class="mood-tag" style="background-color: {{ entry.mood.color }}25; color: {{ entry.mood.color }}; border: 1px solid {{ entry.mood.color }}50;">
+            {{ entry.mood.label }}
+          </span>
+        {% endif %}
+        <div class="title">{{ entry.title }}</div>
+        <div class="text">{{ entry.text }}</div>
+
+        {% if entry.media_path %}
+          {% if entry.media_type == 'image' %}
+            <img src="/{{ entry.media_path }}" class="media" alt="Memory Photo" />
+          {% elif entry.media_type == 'audio' %}
+            <audio controls src="/{{ entry.media_path }}" class="media" style="width: 100%;"></audio>
+          {% elif entry.media_type == 'video' %}
+            <video controls src="/{{ entry.media_path }}" class="media"></video>
+          {% endif %}
+        {% endif %}
+
+        <div class="meta">{{ entry.date.strftime('%b %d, %Y - %H:%M UTC') if entry.date else '' }}</div>
+      </div>
+    {% else %}
+      <p style="color: #94a3b8; font-style: italic;">No star memories in the database yet. Click above to inscribe your first star!</p>
+    {% endfor %}
+  </div>
+</body>
+</html>

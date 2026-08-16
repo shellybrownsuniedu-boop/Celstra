@@ -1,0 +1,6 @@
+{
+  "name": "Celstra - Celestial Memory Journal & Constellation Sky",
+  "description": "A luminous personal digital journal where thoughts, voice notes, photos, and moods blossom into glowing stars and constellations across your personal celestial sky.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

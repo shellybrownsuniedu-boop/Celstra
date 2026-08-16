@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscribe a Star — Starlog</title>
+  <style>
+    body {
+      background-color: #080c18;
+      color: #f3f4f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container { max-width: 580px; margin: 0 auto; }
+    h1 { color: #faedd9; font-family: Georgia, serif; font-weight: normal; }
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; margin-bottom: 0.4rem; color: #eed09d; font-size: 0.85rem; font-style: italic; }
+    input[type="text"], textarea, select {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      box-sizing: border-box;
+    }
+    input[type="file"] { color: #94a3b8; font-size: 0.85rem; }
+    .btn {
+      background: #faedd9;
+      color: #080c18;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .back { color: #94a3b8; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✦ Inscribe a Star Memory</h1>
+    <form action="/entries" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="title">Star Name / Title:</label>
+        <input type="text" id="title" name="title" placeholder="e.g., Midnight Coffee in Florence" required>
+      </div>
+
+      <div class="form-group">
+        <label for="text">Memory Reflection:</label>
+        <textarea id="text" name="text" rows="5" placeholder="Write your memory or thought to cast into the celestial sky..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="mood_id">Emotional Resonance (Mood):</label>
+        <select id="mood_id" name="mood_id">
+          {% for mood in moods %}
+            <option value="{{ mood.id }}">{{ mood.label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="media">Attach Media (Image, Audio, or Video):</label>
+        <input type="file" id="media" name="media" accept="image/*,audio/*,video/*">
+      </div>
+
+      <div style="margin-top: 1.5rem;">
+        <button type="submit" class="btn">Cast Star Into Database</button>
+        <a href="/" class="back">Cancel</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
